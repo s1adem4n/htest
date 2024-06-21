@@ -13,7 +13,10 @@ func main() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("hello\n"))
+		name := r.URL.Query().Get("name")
+
+		w.Header().Set("Content-Type", "text/plain")
+		w.Write([]byte("Hello, " + name + "!\n"))
 	})
 	mux.HandleFunc("/echo", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(r.URL.Path + "\n"))
