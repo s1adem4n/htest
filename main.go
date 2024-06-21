@@ -11,8 +11,12 @@ func main() {
 	flag.Parse()
 
 	mux := http.NewServeMux()
+
 	mux.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("hello"))
+	})
+	mux.HandleFunc("/echo", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte(r.URL.Path))
 	})
 
 	http.ListenAndServe(*Address, mux)
