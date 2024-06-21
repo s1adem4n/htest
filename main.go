@@ -19,5 +19,8 @@ func main() {
 		w.Write([]byte(r.URL.Path))
 	})
 
-	http.ListenAndServe(*Address, mux)
+	err := http.ListenAndServe(*Address, mux)
+	if err != nil {
+		panic(err)
+	}
 }
