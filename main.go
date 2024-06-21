@@ -18,12 +18,6 @@ func main() {
 		w.Header().Set("Content-Type", "text/plain")
 		w.Write([]byte("Hello, " + name + "!\n"))
 	})
-	mux.HandleFunc("/echo", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte(r.URL.Path + "\n"))
-	})
-	mux.HandleFunc("/banana", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("banana\n"))
-	})
 
 	err := http.ListenAndServe(*Address, mux)
 	if err != nil {
