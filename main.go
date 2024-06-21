@@ -13,10 +13,13 @@ func main() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("hello"))
+		w.Write([]byte("hello\n"))
 	})
 	mux.HandleFunc("/echo", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte(r.URL.Path))
+		w.Write([]byte(r.URL.Path + "\n"))
+	})
+	mux.HandleFunc("/banana", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("banana\n"))
 	})
 
 	err := http.ListenAndServe(*Address, mux)
